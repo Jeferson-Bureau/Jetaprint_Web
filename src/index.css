@@ -1,0 +1,236 @@
+/* ==========================================================================
+   JETAPRINT — SISTEMA DE DESIGN (Design.md)
+   Referência visual autoral: mesa de produção gráfica & pré-impressão.
+   ========================================================================== */
+
+:root {
+  /* Paleta Base — Universo Gráfico & Papel Offset */
+  --color-papel: #FAF7F0;          /* Fundo principal — papel offset não-branqueado */
+  --color-papel-card: #FFFFFF;     /* Base do cartão/papel */
+  --color-papel-warm: #F4EFE6;     /* Amostras e fundos de mesa */
+  --color-papel-surface: #EDE6D8;
+
+  --color-tinta: #171512;          /* Texto principal, contornos, marcas de corte — preto quente */
+  --color-tinta-muted: #2E2A25;
+  --color-cinza-chumbo: #6B665F;   /* Texto secundário, legendas, specs */
+  --color-borda-suave: #DFD7CA;
+  --color-borda-tinta: #171512;
+
+  /* Cor de Destaque Única (Spot Color) */
+  --color-marigold: #F2A900;       /* Preços, CTAs principais, estado ativo */
+  --color-marigold-hover: #D69400;
+  --color-marigold-light: #FFF8E6;
+
+  /* Registro CMYK (Acentos raros, pontuais) */
+  --color-ciano-registro: #00AEEF;
+  --color-magenta-registro: #EC008C;
+
+  /* Tipografia (Design.md) */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Escala Modular Obrigatória (rem): 0.8125 / 0.9375 / 1 / 1.25 / 1.75 / 2.5 / 3.5 */
+  --text-scale-xs: 0.8125rem;  /* 13px - specs em mono e legendas */
+  --text-scale-sm: 0.9375rem;  /* 15px - texto corrido secundário e botões */
+  --text-scale-base: 1rem;     /* 16px - texto corrido */
+  --text-scale-lg: 1.25rem;    /* 20px - subtítulos */
+  --text-scale-xl: 1.75rem;    /* 28px - títulos de seção */
+  --text-scale-2xl: 2.5rem;    /* 40px - títulos grandes */
+  --text-scale-3xl: 3.5rem;    /* 56px - títulos display hero */
+
+  /* Layout */
+  --container-max: 1220px;
+  --max-reading-width: 75ch;   /* Design.md: manter parágrafos abaixo de ~75 caracteres */
+
+  /* Transições contidas */
+  --transition-fast: 0.16s ease;
+  --transition-normal: 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset Global */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-scale-base);
+  line-height: 1.55;
+  color: var(--color-tinta);
+  background-color: var(--color-papel);
+  min-height: 100vh;
+}
+
+/* Container do Layout */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Tipografia */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-tinta);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Limite de linha recomendado no Design.md */
+p {
+  max-width: var(--max-reading-width);
+}
+
+/* Tipografia Mono: reservada estritamente para dados técnicos reais do produto */
+.mono-spec {
+  font-family: var(--font-mono);
+  font-size: var(--text-scale-xs);
+  color: var(--color-cinza-chumbo);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   CONCEITO DE GRID: MESA DE CORTE (Design.md)
+   Cards com marcas de corte (linhas em L) nos 4 cantos em vez de border-radius + sombra
+   ========================================================================== */
+.crop-card {
+  position: relative;
+  background: var(--color-papel-card);
+  border: 1px solid var(--color-borda-suave);
+  border-radius: 0; /* Zero cantos arredondados de SaaS */
+  box-shadow: none; /* Zero sombras cinzas difusas de SaaS */
+  transition: border-color var(--transition-fast);
+}
+
+/* Linhas em L (Crop Marks) nos 4 cantos */
+.crop-card .c-mark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 3;
+  transition: transform var(--transition-normal), border-color var(--transition-fast);
+}
+
+.crop-card .c-mark-tl {
+  top: -4px;
+  left: -4px;
+  border-top: 2px solid var(--color-tinta);
+  border-left: 2px solid var(--color-tinta);
+}
+
+.crop-card .c-mark-tr {
+  top: -4px;
+  right: -4px;
+  border-top: 2px solid var(--color-tinta);
+  border-right: 2px solid var(--color-tinta);
+}
+
+.crop-card .c-mark-bl {
+  bottom: -4px;
+  left: -4px;
+  border-bottom: 2px solid var(--color-tinta);
+  border-left: 2px solid var(--color-tinta);
+}
+
+.crop-card .c-mark-br {
+  bottom: -4px;
+  right: -4px;
+  border-bottom: 2px solid var(--color-tinta);
+  border-right: 2px solid var(--color-tinta);
+}
+
+/* Movimento contido (Design.md): as marcas de corte fecham no hover */
+.crop-card:hover .c-mark-tl {
+  transform: translate(3px, 3px);
+  border-color: var(--color-marigold);
+}
+.crop-card:hover .c-mark-tr {
+  transform: translate(-3px, 3px);
+  border-color: var(--color-marigold);
+}
+.crop-card:hover .c-mark-bl {
+  transform: translate(3px, -3px);
+  border-color: var(--color-marigold);
+}
+.crop-card:hover .c-mark-br {
+  transform: translate(-3px, -3px);
+  border-color: var(--color-marigold);
+}
+
+/* Botões do Sistema — Marigold como Spot Color de ação */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--color-marigold);
+  color: var(--color-tinta);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-scale-sm);
+  padding: 12px 24px;
+  border: 1px solid var(--color-tinta);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-marigold-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--color-tinta);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-scale-sm);
+  padding: 11px 20px;
+  border: 1px solid var(--color-tinta);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-tinta);
+  color: var(--color-papel);
+}
+
+/* Pontos de Registro CMYK */
+.cmyk-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.cmyk-dot.cyan { background-color: var(--color-ciano-registro); }
+.cmyk-dot.magenta { background-color: var(--color-magenta-registro); }
+.cmyk-dot.yellow { background-color: var(--color-marigold); }
+.cmyk-dot.black { background-color: var(--color-tinta); }
