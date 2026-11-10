@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "home-rolagem/index.html"
+        ],
+        "createdAt": "2026-11-10T17:26:56.483Z",
+        "reason": "Claude: overflow:hidden on the sticky scroll stage (.fx-palco from the sites-incriveis engine) and photo frames is intentional; positioned crop marks sit inside padding, nothing needs to escape"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "home-rolagem/index.html"
+        ],
+        "createdAt": "2026-11-10T17:36:07.306Z",
+        "reason": "Claude: paper background #F5F2EA is the offset-paper 'Papel' token from the project Design.md, listed in the BRIEF the user approved"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument sans",
+        "files": [
+          "home-rolagem/index.html"
+        ],
+        "createdAt": "2026-11-10T17:36:07.627Z",
+        "reason": "Claude: deliberate body face paired with Bricolage Grotesque display, chosen in the approved BRIEF"
+      }
+    ]
+  }
+}
