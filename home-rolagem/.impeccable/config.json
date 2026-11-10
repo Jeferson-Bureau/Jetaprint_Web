@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "home-rolagem/index.html"
+        ],
+        "createdAt": "2026-11-10T17:26:56.483Z",
+        "reason": "Claude: overflow:hidden on the sticky scroll stage (.fx-palco from the sites-incriveis engine) and photo frames is intentional; positioned crop marks sit inside padding, nothing needs to escape"
+      }
+    ]
+  }
+}
